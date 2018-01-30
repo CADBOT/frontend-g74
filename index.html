@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <h1>Donuts... Yum! Amazing! Wow</h1>
+    <section id='donutList'>
+    </section>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      console.log(axios)
+      axios.get('http://localhost:3000/donuts')
+        .then(res => {
+          console.log(res.data.data)
+          let donuts = res.data.data
+          donuts.forEach(donut => {
+            let donutElement = document.createElement('div')
+            donutElement.textContent = `Type: ${donut.type}
+                                        Price: ${donut.price}
+                                        Brand: ${donut.brand}
+                                        rating: ${donut.rating}
+                                       `
+            document.querySelector('#donutList').appendChild(donutElement)
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    </script>
+  </body>
+</html>
